@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To Do</title>
+  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-css-only/css/bootstrap.css">
+</head>
+<body ng-app="todo">
+
+
+<div ng-controller="TodoController" class="container">
+    <form role="form" ng-submit="submit()">
+      <input type='text' class="form-control" placeholder="Todo" ng-model="todo" ng-minlength="1" />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <div class="todos">
+      <ul>
+        <li ng-repeat="todo in todos" ng-click="">
+          {{ todo }}
+        </li>
+      </ul>
+    </div>
+</div>
+
+
+<script src="bower_components/angular/angular.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+</html>
