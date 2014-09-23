@@ -4,10 +4,10 @@
   <title>To Do</title>
   <link rel="stylesheet" type="text/css" href="lib/bootstrap-css-only/css/bootstrap.css">
 </head>
-<body ng-app="todo">
+<body ng-app="todoApp">
 
 
-<div ng-controller="TodoController" class="container">
+<!-- <div ng-controller="TodoController" class="container">
     <form role="form" ng-submit="submit()">
       <input type='text' class="form-control" placeholder="Todo" ng-model="todo" ng-minlength="1" />
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -20,13 +20,15 @@
         </li>
       </ul>
     </div>
-</div>
-
+</div> -->
+  <div ui-view></div>
 
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
 
 <script src="app/app.js"></script>
+<script src="app/login/login.js"></script>
+<!-- <script src="app/todos/todos.js"></script> -->
 
 </body>
 </html>
