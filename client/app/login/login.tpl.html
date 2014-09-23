@@ -1,1 +1,11 @@
-<div>Login Page</div>
+<div class="container">
+  <form ng-submit="login(credentials)" novalidate>
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" ng-model="credentials.username">
+      <label for="password">Password:</label>
+      <input type="text" class="form-control" ng-model="credentials.password"> </br>
+      <button class="btn btn-primary" type="submit">Login</button>
+    </div>
+  </form>
+</div>
