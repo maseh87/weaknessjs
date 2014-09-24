@@ -8,6 +8,7 @@ mongoose.connect('mongodb://localhost/weaknessjs');
 
 var todos = [];
 var id = 0;
+var users = {};
 
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/../client'));
@@ -41,6 +42,24 @@ app.put('/todos', function(req, res, next) {
       todos[i].todo = req.body.todo;
       res.send(todos);
     }
+  }
+});
+
+app.post('/login', function(req, res, next) {
+  if(req.body.username in users && req.body.password === users[username]) {
+    res.send(200);
+  } else {
+    res.send(401);
+  }
+});
+
+app.post('/signup', function(req, res, next) {
+  console.log(req.body);
+  if(req.body.username in users) {
+    res.send(500);
+  } else {
+    users[req.body.username] = req.body.password;
+    res.send(200);
   }
 });
 

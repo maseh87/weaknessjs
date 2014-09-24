@@ -8,8 +8,14 @@ angular.module('app.login', [])
       controller: 'LoginController'
     });
 })
-.controller('LoginController', function($scope) {
-  $scope.login = function(credentials) {
-    console.log(credentials);
+.controller('LoginController', function($scope, $http, $state) {
+  $scope.signup = function(credentials) {
+    $http({
+      method: 'POST',
+      url: '/signup',
+      data: credentials
+    }).then(function(res) {
+      $state.go('app.todos');
+    });
   };
 });
