@@ -5,7 +5,8 @@ angular.module('app.todos', [])
     .state('app.todos', {
       url: 'todos',
       templateUrl: '/app/todos/todos.tpl.html',
-      controller: 'TodosController'
+      controller: 'TodosController',
+      authenticate: true
     });
 })
 .controller('TodosController', function($scope, $http) {

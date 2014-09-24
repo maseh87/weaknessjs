@@ -7,8 +7,16 @@ angular.module('todoApp', [
   $stateProvider
     .state('app', {
       url: '/',
-      templateUrl: '../index.html',
-      abstract: true
+      template: '<div ui-view></div>'
     });
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/todos');
+})
+.run(function($rootScope, $state) {
+  $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState, fromStateParams) {
+    if(toState.authenticate) {
+      event.preventDefault();
+      console.log('Yep it works');
+      $state.go('app.login');
+    }
+  });
 });

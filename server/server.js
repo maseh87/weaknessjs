@@ -59,6 +59,7 @@ app.post('/signup', function(req, res, next) {
     res.send(500);
   } else {
     users[req.body.username] = req.body.password;
+    res.cookie('my', 'cookie');
     res.send(200);
   }
 });
