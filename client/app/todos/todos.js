@@ -1,4 +1,14 @@
-app.controller('TodoController', function($scope, $http) {
+angular.module('app.todos', [])
+
+.config(function($stateProvider) {
+  $stateProvider
+    .state('app.todos', {
+      url: 'todos',
+      templateUrl: '/app/todos/todos.tpl.html',
+      controller: 'TodosController'
+    });
+})
+.controller('TodosController', function($scope, $http) {
   $scope.todo = '';
 
   $http.get('/todos').then(function(res) {
@@ -6,15 +16,13 @@ app.controller('TodoController', function($scope, $http) {
   });
 
   $scope.submit = function() {
-    if($scope.todo !== '') {
-      $http({
-        method: 'POST',
-        url: '/todos',
-        data: {todo: $scope.todo}
-      }).then(function(res) {
-        $scope.todos.push(res.data);
-        $scope.todo = '';
-      });
-    }
+    $http({
+      method: 'POST',
+      url: '/todos',
+      data: {todo: $scope.todo}
+    }).then(function(res) {
+      $scope.todos.push(res.data);
+      $scope.todo = '';
+    });
   };
 });

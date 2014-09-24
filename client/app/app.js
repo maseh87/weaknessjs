@@ -1,6 +1,7 @@
 angular.module('todoApp', [
   'ui.router',
-  'app.login'
+  'app.login',
+  'app.todos'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

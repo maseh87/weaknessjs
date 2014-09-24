@@ -7,6 +7,7 @@ var express    = require('express');
 mongoose.connect('mongodb://localhost/weaknessjs');
 
 var todos = [];
+var id = 1;
 
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/../client'));
@@ -18,6 +19,9 @@ app.get('/todos', function(req, res, next) {
 });
 
 app.post('/todos', function(req, res, next) {
+  console.log(req.body);
+  req.body.id = id;
+  id++;
   todos.push(req.body);
   res.send(req.body);
 });
