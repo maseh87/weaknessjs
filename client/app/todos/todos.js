@@ -27,10 +27,11 @@ angular.module('app.todos', [])
   };
 
   $scope.finished = function(index) {
+    console.log($scope.todos[index]);
     $http({
-      method: 'DELETE',
-      url: '/todos',
-      data: {id: $scope.todos[index].id}
+      method: 'POST',
+      url: '/delete',
+      data: $scope.todos[index]
     }).then(function(res) {
       $scope.todos = res.data;
     });

@@ -25,8 +25,13 @@ app.post('/todos', function(req, res, next) {
   res.send(req.body);
 });
 
-app.delete('/todos', function(req, res, next) {
-
+app.post('/delete', function(req, res, next) {
+  for(var i = 0; i < todos.length; i++) {
+    if(todos[i].id === req.body.id) {
+      todos.splice(i, 1);
+      res.send(todos);
+    }
+  }
 });
 
 module.exports = app;
