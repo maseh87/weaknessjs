@@ -7,7 +7,8 @@
     <div class="todos">
       <ul>
         <li ng-repeat="todo in todos" ng-click="">
-          {{ todo }}
+          <input type="checkbox" ng-click="finished($index)">
+          {{ todo.todo }}
         </li>
       </ul>
     </div>

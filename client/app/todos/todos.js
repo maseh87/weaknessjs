@@ -25,4 +25,14 @@ angular.module('app.todos', [])
       $scope.todo = '';
     });
   };
+
+  $scope.finished = function(index) {
+    $http({
+      method: 'DELETE',
+      url: '/todos',
+      data: {id: $scope.todos[index].id}
+    }).then(function(res) {
+      $scope.todos = res.data;
+    });
+  };
 });

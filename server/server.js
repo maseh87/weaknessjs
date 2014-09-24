@@ -19,11 +19,14 @@ app.get('/todos', function(req, res, next) {
 });
 
 app.post('/todos', function(req, res, next) {
-  console.log(req.body);
   req.body.id = id;
   id++;
   todos.push(req.body);
   res.send(req.body);
+});
+
+app.delete('/todos', function(req, res, next) {
+
 });
 
 module.exports = app;
