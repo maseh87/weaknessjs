@@ -27,13 +27,17 @@ angular.module('app.todos', [])
   };
 
   $scope.finished = function(index) {
-    console.log($scope.todos[index]);
     $http({
-      method: 'POST',
-      url: '/delete',
-      data: $scope.todos[index]
+      method: 'DELETE',
+      url: '/todos/' + $scope.todos[index].id,
     }).then(function(res) {
-      $scope.todos = res.data;
+      for(var i = 0; i < $scope.todos.length; i++) {
+        if($scope.todos[i].id === parseInt(res.data.id)) {
+          $scope.todos.splice(i, 1);
+        }
+      }
+    }).catch(function(err) {
+      console.log(err, ' err');
     });
   };
 });
