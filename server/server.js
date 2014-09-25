@@ -39,6 +39,8 @@ app.get('/github', passport.authenticate('github', {
 app.get('/github/callback', passport.authenticate('github', {
   session: false
 }), function(req, res) {
+  var token = jsonWT.sign({id: req.user.id}, 'thisismydopesecret', {});
+  res.cookie('__todos', token);
   res.redirect('/');
 });
 

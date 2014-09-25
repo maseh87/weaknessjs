@@ -8,7 +8,7 @@ angular.module('app.login', [])
       controller: 'LoginController'
     });
 })
-.controller('LoginController', function($scope, $http, $state, $window) {
+.controller('LoginController', function($scope, $http, $state, $window, $interval) {
   $scope.signup = function(credentials) {
     $http({
       method: 'POST',
@@ -18,8 +18,17 @@ angular.module('app.login', [])
       $state.go('app.todos');
     });
   };
-
+  var githubWindow;
   $scope.openWindow = function() {
-    $window.open('http://localhost:3000/github', '_blank', 'location=0,status0,modal=yes,alwaysRaised=yes,width=800,height=600');
+    githubWindow = $window.open('http://localhost:3000/github', '_blank', 'location=0,status0,modal=yes,alwaysRaised=yes,width=800,height=600');
+    $interval(function() {
+      if(githubWindow.closed) {
+        console.log('it closed');
+        //once its closed stop interval
+        //get the cookie
+        //make a server call to get the user info
+        //do what i got to do with the user info
+      }
+    }, 2000);
   };
 });
