@@ -8,7 +8,7 @@ angular.module('app.login', [])
       controller: 'LoginController'
     });
 })
-.controller('LoginController', function($scope, $http, $state) {
+.controller('LoginController', function($scope, $http, $state, $window) {
   $scope.signup = function(credentials) {
     $http({
       method: 'POST',
@@ -17,5 +17,9 @@ angular.module('app.login', [])
     }).then(function(res) {
       $state.go('app.todos');
     });
+  };
+
+  $scope.openWindow = function() {
+    $window.open('http://localhost:3000/github', '_blank', 'location=0,status0,modal=yes,alwaysRaised=yes,width=800,height=600');
   };
 });
