@@ -13,8 +13,8 @@ var express    = require('express'),
 mongoose.connect('mongodb://localhost/weaknessjs');
 
 passport.use(new github({
-  clientID: '24a142e1ff7f3b6d5b73',
-  clientSecret: '528dead090e5adf9a87b41eb0989bb2925752184'
+  clientID: process.env.GH_CLIENT_ID,
+  clientSecret: process.env.GH_CLIENT_SECRET
 }, function(token, tokenSecret, profile, done) {
   console.log(tokenSecret);
   console.log(profile);
@@ -39,7 +39,7 @@ app.get('/github', passport.authenticate('github', {
 app.get('/github/callback', passport.authenticate('github', {
   session: false
 }), function(req, res) {
-  var token = jsonWT.sign({id: req.user.id}, 'thisismydopesecret', {});
+  var token = jsonWT.sign({id: req.user.id}, process.env.TOKEN_SECRET, {});
   res.cookie('__todos', token);
   res.redirect('/');
 });
