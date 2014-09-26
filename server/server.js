@@ -44,6 +44,7 @@ app.get('/github/callback', passport.authenticate('github', {
   var token = jsonWT.sign({id: req.user.id}, process.env.TOKEN_SECRET, {});
   // console.log(token, ' token');
   res.cookie('todos', JSON.stringify(token));
+  //call the close window route to close the pop up window
   res.redirect('/closeWindow');
 });
 
