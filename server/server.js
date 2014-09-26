@@ -81,6 +81,7 @@ app.put('/todos', function(req, res, next) {
     }
   }
 });
+
 //route for logging in
 app.post('/login', function(req, res, next) {
   if(req.body.username in users && req.body.password === users[username]) {
@@ -89,13 +90,15 @@ app.post('/login', function(req, res, next) {
     res.send(401);
   }
 });
+
 //route to signout
 app.post('/signout', function(req, res, next) {
 
 });
+
 //route to get called after authenticating with github
 app.get('/closeWindow', function(req, res, next ) {
   res.sendFile(__dirname + '/close.html');
 });
-
+//export the app function to require in index.js
 module.exports = app;
