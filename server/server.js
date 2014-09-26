@@ -17,7 +17,6 @@ passport.use(new github({
   clientSecret: process.env.GH_CLIENT_SECRET
 }, function(token, tokenSecret, profile, done) {
   //need to save tokens also in case I need to go back to github in the future
-  console.log(profile, ' here is the profile');
   //need to find or create a user based on the profile I received from github
   //call the done function to end this and attach the profile to the req.user
   done(null, profile);
@@ -87,7 +86,6 @@ app.post('/login', function(req, res, next) {
 });
 
 app.post('/signup', function(req, res, next) {
-  console.log(req.body);
   if(req.body.username in users) {
     res.send(500);
   } else {
