@@ -27,11 +27,16 @@ var todos = [];
 var id = 0;
 var users = {};
 
+
+
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/../client'));
 app.use(cookieParser());
 app.use(bodyparser.json());
 app.use(passport.initialize());
+
+
+
 
 app.get('/github', passport.authenticate('github', {
   session: false
@@ -76,7 +81,7 @@ app.put('/todos', function(req, res, next) {
     }
   }
 });
-
+//route for logging in
 app.post('/login', function(req, res, next) {
   if(req.body.username in users && req.body.password === users[username]) {
     res.send(200);
@@ -84,17 +89,11 @@ app.post('/login', function(req, res, next) {
     res.send(401);
   }
 });
+//route to signout
+app.post('/signout', function(req, res, next) {
 
-app.post('/signup', function(req, res, next) {
-  if(req.body.username in users) {
-    res.send(500);
-  } else {
-    users[req.body.username] = req.body.password;
-    res.cookie('my', 'cookie');
-    res.send(200);
-  }
 });
-
+//route to get called after authenticating with github
 app.get('/closeWindow', function(req, res, next ) {
   res.sendFile(__dirname + '/close.html');
 });
