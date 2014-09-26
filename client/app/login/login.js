@@ -21,7 +21,7 @@ angular.module('app.login', [])
   var githubWindow;
   $scope.openWindow = function() {
     githubWindow = $window.open('http://localhost:3000/github', '_blank', 'location=0,status0,modal=yes,alwaysRaised=yes,width=800,height=600');
-    $interval(function() {
+    var intervalID = $interval(function() {
       if(githubWindow.closed) {
         console.log('it closed');
         var cookie = $cookieStore.get('todos');
@@ -29,6 +29,8 @@ angular.module('app.login', [])
 
         // });
         //once its closed stop interval
+        $interval.cancel(intervalID);
+        $state.go('app.todos');
         //get the cookie
         //make a server call to get the user info
         //do what i got to do with the user info
