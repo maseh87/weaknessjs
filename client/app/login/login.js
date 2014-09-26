@@ -8,7 +8,7 @@ angular.module('app.login', [])
       controller: 'LoginController'
     });
 })
-.controller('LoginController', function($scope, $http, $state, $window, $interval) {
+.controller('LoginController', function($scope, $http, $state, $window, $interval, $cookieStore) {
   $scope.signup = function(credentials) {
     $http({
       method: 'POST',
@@ -24,6 +24,10 @@ angular.module('app.login', [])
     $interval(function() {
       if(githubWindow.closed) {
         console.log('it closed');
+        var cookie = $cookieStore.get('todos');
+        // $http({
+
+        // });
         //once its closed stop interval
         //get the cookie
         //make a server call to get the user info

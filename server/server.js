@@ -16,8 +16,10 @@ passport.use(new github({
   clientID: process.env.GH_CLIENT_ID,
   clientSecret: process.env.GH_CLIENT_SECRET
 }, function(token, tokenSecret, profile, done) {
-  console.log(tokenSecret);
-  console.log(profile);
+  //need to save tokens also in case I need to go back to github in the future
+  console.log(profile, ' here is the profile');
+  //need to find or create a user based on the profile I received from github
+  //call the done function to end this and attach the profile to the req.user
   done(null, profile);
 }));
 
@@ -35,13 +37,14 @@ app.use(passport.initialize());
 app.get('/github', passport.authenticate('github', {
   session: false
 }));
-
+//github call url I specified in my github profile
 app.get('/github/callback', passport.authenticate('github', {
   session: false
 }), function(req, res) {
   var token = jsonWT.sign({id: req.user.id}, process.env.TOKEN_SECRET, {});
-  res.cookie('__todos', token);
-  res.redirect('/');
+  // console.log(token, ' token');
+  res.cookie('todos', JSON.stringify(token));
+  res.redirect('/closeWindow');
 });
 
 app.get('/todos', function(req, res, next) {
@@ -93,5 +96,8 @@ app.post('/signup', function(req, res, next) {
   }
 });
 
+app.get('/closeWindow', function(req, res, next ) {
+  res.sendFile(__dirname + '/close.html');
+});
 
 module.exports = app;
