@@ -100,5 +100,6 @@ app.post('/signout', function(req, res, next) {
 app.get('/closeWindow', function(req, res, next ) {
   res.sendFile(__dirname + '/close.html');
 });
+
 //export the app function to require in index.js
 module.exports = app;
