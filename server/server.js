@@ -37,7 +37,7 @@ app.use(passport.initialize());
 
 
 
-
+//auth route for github
 app.get('/github', passport.authenticate('github', {
   session: false
 }));
